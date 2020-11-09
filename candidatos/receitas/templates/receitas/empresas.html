@@ -1,0 +1,15 @@
+<ul>
+    {% for key in dados %}
+    <li>
+        {{key}}
+        {% for value in dados|get_value_from_dict:key %}
+            <ul>
+                <li>
+                    {{value}}
+                </li>
+            </ul>
+        {% endfor %}
+    </li>
+    {% endfor %}
+
+</ul>

@@ -1,0 +1,14 @@
+{% load render_table from django_tables2 %}
+
+<!doctype html>
+<html>
+    <head>
+        <title>Lista das despesas</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    </head>
+    <div>
+        <body>
+            {% render_table table %}
+        </body>
+    </div>
+</html>
