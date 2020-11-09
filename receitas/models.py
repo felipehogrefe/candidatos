@@ -52,9 +52,9 @@ class Receita(models.Model):
     data = models.DateField()
     especia_do_recurso = models.CharField(max_length=100)
     descricao_do_recurso = models.CharField(max_length=200, null=True, verbose_name="Descrição do recurso")
-    numero_documento = models.CharField(max_length=22, null=True)
-    recibo_eleitoral = models.CharField(max_length=22, null=True)
-    valor = models.DecimalField(max_digits=20, decimal_places=2, verbose_name='Valor (R$)')
+    numero_documento = models.CharField(max_length=100, null=True)
+    recibo_eleitoral = models.CharField(max_length=100, null=True)
+    valor = models.DecimalField(max_digits=100, decimal_places=2, verbose_name='Valor (R$)')
     fonte = models.CharField(max_length=100)
 
     def __str__(self):
