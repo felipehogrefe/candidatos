@@ -17,11 +17,11 @@ csvs_path = cur_path + '/csvs'
 opcoes_csv = ('receitas', 'despesas')
 
 def main():
-    # chrome_options = configura_chrome()
-    #
-    # for candidato in Candidato.objects.all():
-    #     for opcao in opcoes_csv:
-    #         busca_dados(candidato, opcao, chrome_options)
+    chrome_options = configura_chrome()
+
+    for candidato in Candidato.objects.all():
+        for opcao in opcoes_csv:
+            busca_dados(candidato, opcao, chrome_options)
 
     processa_dados()
 

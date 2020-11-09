@@ -1,11 +1,12 @@
 
 <div>
-    <header style="/* Stick to the top */ position: sticky; top: 20; margin-bottom: 30;">
+    <header style="/* Stick to the top */ position: sticky; top: 20; margin-bottom: 30; background: white">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <h1 style="margin: auto; padding: 10px">
             <a href="{% url 'receitas:index'%}" style="margin-right: 20px">Início</a>
             <a href="{% url 'receitas:receitas'%}" style="margin-right: 20px">Receitas</a>
-            <a href="{% url 'receitas:despesas'%}">Despesas</a>
+            <a href="{% url 'receitas:despesas'%}" style="margin-right: 20px">Despesas</a>
+            <a href="{% url 'receitas:empresas'%}" style="margin-right: 20px">Empresas</a>
         </h1>
     </header>
     <hr />
