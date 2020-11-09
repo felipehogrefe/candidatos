@@ -1,3 +1,6 @@
+{% extends "receitas/base_site.html" %}
+
+{% block branding %}
 <ul>
     <li>NOME: {{pessoa_detail.nome}}</li>
     <li>CPF/CNPJ: {{pessoa_detail.doc}}</li>
@@ -5,9 +8,10 @@
         <li>Sócio em:
             <ul>
                 {% for empresa in empresas %}
-                    <li>{{empresa.razao_social}} -{{empresa.doc}}</li>
+                    <li>{{empresa.razao_social}} - {{empresa.doc}}</li>
                 {% endfor %}
             </ul>
         </li>
     {% endif %}
 </ul>
+{% endblock %}

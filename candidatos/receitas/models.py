@@ -46,7 +46,7 @@ class Candidato(models.Model):
 
 class Receita(models.Model):
     candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, verbose_name="Candidato")
-    pessoa_doador = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    pessoa_doador = models.ForeignKey(Pessoa, on_delete=models.CASCADE, verbose_name="Doador")
     doc_originario = models.CharField(max_length=16, null=True)
     nome_doador_originario = models.CharField(max_length=100, null=True)
     data = models.DateField()
