@@ -69,8 +69,8 @@ class Despesa(models.Model):
     nome_doador_originario = models.CharField(max_length=100, null=True)
     data = models.DateField()
     especia_do_recurso = models.CharField(max_length=100)
-    numero_documento = models.CharField(max_length=22, null=True)
-    recibo_eleitoral = models.CharField(max_length=22, null=True)
+    numero_documento = models.CharField(max_length=100, null=True)
+    recibo_eleitoral = models.CharField(max_length=100, null=True)
     valor = models.DecimalField(max_digits=20, decimal_places=2, verbose_name='Valor (R$)')
 
     def __str__(self):
