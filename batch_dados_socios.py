@@ -10,7 +10,7 @@ from receitas.models import Pessoa, Empresa, Sociedade
 
 
 cur_path = os.path.abspath(os.getcwd())
-csvs_path = cur_path + '\\csvs\\socios'
+csvs_path = cur_path + '/csvs/socios'
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
 
 def processa_csvs(pessoa):
     for csv in os.listdir(csvs_path):
-        file = open(csvs_path + '\\' + csv, encoding="utf-8")
+        file = open(csvs_path + '/' + csv, encoding="utf-8")
         for line in file.readlines()[1:]:
             dados = line.split(',')
             cnpj = dados[0]
@@ -51,7 +51,6 @@ def processa_csvs(pessoa):
 
         file.close()
         os.remove(csvs_path + '\\' + csv)
-
 
 
 def recupera_dados_empresas(pessoa):

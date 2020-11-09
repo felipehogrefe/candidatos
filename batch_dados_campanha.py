@@ -13,7 +13,7 @@ django.setup()
 from receitas.models import Candidato, Receita, Despesa, Pessoa
 
 cur_path = os.path.abspath(os.getcwd())
-csvs_path = cur_path + '\\csvs'
+csvs_path = cur_path + '/csvs'
 opcoes_csv = ('receitas', 'despesas')
 
 def main():
