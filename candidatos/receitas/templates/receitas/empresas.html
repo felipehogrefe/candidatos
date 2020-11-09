@@ -5,7 +5,14 @@
         {% for value in dados|get_value_from_dict:key %}
             <ul>
                 <li>
-                    {{value}}
+                    R$ {{value.1}} doados por <a href="{% url 'receitas:pessoa_detail' value.0.1.id %}">{{ value.0.1 }}</a> {% if value.0.0 %} sócio nas seguintes empresas: {% endif %}
+                    {% for empresa in value.0.0 %}
+                        <ul>
+                            <li>
+                                {{ empresa }}
+                            </li>
+                        </ul>
+                    {% endfor %}
                 </li>
             </ul>
         {% endfor %}

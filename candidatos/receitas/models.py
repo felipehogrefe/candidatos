@@ -17,9 +17,10 @@ class Pessoa(models.Model):
 class Empresa(models.Model):
     razao_social = models.CharField(max_length=100)
     doc = models.CharField(max_length=100, unique=True)
+    doc_raiz = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return "{} - {}".format(self.razao_social, self.doc)
+        return "{} - {}".format(self.razao_social, self.doc_raiz)
 
 
 class Sociedade(models.Model):

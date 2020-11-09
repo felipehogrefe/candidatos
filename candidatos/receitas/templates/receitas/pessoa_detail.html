@@ -1,0 +1,13 @@
+<ul>
+    <li>NOME: {{pessoa_detail.nome}}</li>
+    <li>CPF/CNPJ: {{pessoa_detail.doc}}</li>
+    {% if empresas %}
+        <li>Sócio em:
+            <ul>
+                {% for empresa in empresas %}
+                    <li>{{empresa.razao_social}} -{{empresa.doc}}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+</ul>
