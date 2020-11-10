@@ -36,6 +36,7 @@ def pessoa_detail(request, pessoa_id):
 def get_candidatos(request):
 
     dados_receita = defaultdict(list)
+    charts_data = {}
     for receita in Receita.objects.all():
         sociedades = Sociedade.objects.filter(pessoa=receita.pessoa_doador)
         str_empresas = []
@@ -48,7 +49,13 @@ def get_candidatos(request):
         dados_receita[candidato].sort(key=lambda tup: tup[1], reverse=True)
         dados_receita[candidato] = dados_receita[candidato][:10]
 
-    return render(request, 'receitas/candidatos.html', {'dados_receita': dados_receita})
+    for candidato in dados_receita:
+        charts_data[candidato.id] = {'labels': [], 'data': []}
+        for receita in dados_receita[candidato][:5]:
+            charts_data[candidato.id]['labels'].append(receita[0][1].nome)
+            charts_data[candidato.id]['data'].append(float(receita[1]))
+
+    return render(request, 'receitas/candidatos.html', {'dados_receita': dados_receita, 'dados_charts': charts_data})
 
 @register.filter('get_value_from_dict')
 def get_value_from_dict(dict_data, key):

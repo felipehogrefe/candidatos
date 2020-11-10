@@ -2,33 +2,60 @@
 
 {% block branding %}
 
-<div style="height: 80vh; overflow-y: scroll;">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+    function ofai(key){
+        var ctx = document.getElementById(key).getContext('2d');
+
+
+        var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: {{dados_charts|safe}}[key]['data'],
+                backgroundColor: ['#99ccff', '#80dfff', '#1ac6ff', '#0099cc', '#006080'],
+                label: 'Population'
+                }],
+                labels: {{dados_charts|safe}}[key]['labels']
+            },
+            options: {responsive: true}
+        };
+
+        window.myPie = new Chart(ctx, config);
+    };
+</script>
+<head>
+    <title>Candidatos</title>
+</head>
+<div style="height: 85vh; overflow-y: scroll;">
         {% for key in dados_receita %}
         <div class="border">
-            <button class="collapsible">{{key}}</button>
+            <button class="collapsible", onclick="ofai({{key.id}})">{{key.nome}}</button>
             <div class="content">
-                <table>
-                    <td>
-                        {% for value in dados_receita|get_value_from_dict:key %}
-                            <ul>
-                                <li>
-                                    R$ {{value.1}} doados por <a href="{% url 'receitas:pessoa_detail' value.0.1.id %}">{{ value.0.1 }}</a> {% if value.0.0 %} sócio nas seguintes empresas: {% endif %}
-                                    {% for empresa in value.0.0 %}
-                                        <ul>
-                                            <li>
-                                                {{ empresa }}
-                                            </li>
-                                        </ul>
-                                    {% endfor %}
-                                </li>
-                            </ul>
-                        {% endfor %}
-                    </td>
-                    <td>
+                <div class="split">
+                    <h3>Doadores e empresas nas quais são sócios</h3>
+                    {% for value in dados_receita|get_value_from_dict:key %}
+                        <ul><li>
+                            R$ {{value.1}} doados por <a href="{% url 'receitas:pessoa_detail' value.0.1.id %}">{{ value.0.1 }}</a> {% if value.0.0 %} sócio nas seguintes empresas: {% endif %}
+                            {% for empresa in value.0.0 %}
+                                <ul> <li>{{ empresa }} </li></ul>
+                            {% endfor %}
+                        </li></ul>
+                    {% endfor %}
+                </div>
 
+                <div class="split">
+                    <div>
+                        <h3> Top 5 doadores</h3>
+                        <canvas id={{key.id}} accesskey={{key.id}}></canvas>
+                    </div>
+                    </p>
+                    <h3>Informações do candidato</h3>
+                    <p>Nome: {{key.nome}}</p>
+                    <p>Número: {{key.numero}}</p>
+                    <p>Partido: {{key.partido}}</p>
 
-                    </td>
-                </table>
+                </div>
             </div>
         </div>
         {% endfor %}
