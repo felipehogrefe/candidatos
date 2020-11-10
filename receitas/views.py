@@ -43,7 +43,13 @@ def get_candidatos(request):
         for sociedade in sociedades:
             if str(sociedade.empresa) not in str_empresas:
                 str_empresas.append(str(sociedade.empresa))
-        dados_receita[receita.candidato].append(((str_empresas, receita.pessoa_doador), receita.valor))
+
+        for r in dados_receita[receita.candidato]:
+            if r[0][1] == receita.pessoa_doador:
+                r[1] = r[1]+receita.valor
+                break
+        else:
+            dados_receita[receita.candidato].append([(str_empresas, receita.pessoa_doador), receita.valor])
 
     for candidato in dados_receita:
         dados_receita[candidato].sort(key=lambda tup: tup[1], reverse=True)
