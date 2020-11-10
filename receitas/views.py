@@ -33,22 +33,22 @@ def pessoa_detail(request, pessoa_id):
     return render(request, 'receitas/pessoa_detail.html', {'pessoa_detail': pessoa, 'empresas': empresas})
 
 
-def get_empresas(request):
+def get_candidatos(request):
 
-    dados = defaultdict(list)
+    dados_receita = defaultdict(list)
     for receita in Receita.objects.all():
         sociedades = Sociedade.objects.filter(pessoa=receita.pessoa_doador)
         str_empresas = []
         for sociedade in sociedades:
             if str(sociedade.empresa) not in str_empresas:
                 str_empresas.append(str(sociedade.empresa))
-        dados[receita.candidato].append(((str_empresas, receita.pessoa_doador), receita.valor))
+        dados_receita[receita.candidato].append(((str_empresas, receita.pessoa_doador), receita.valor))
 
-    for candidato in dados:
-        dados[candidato].sort(key=lambda tup: tup[1], reverse=True)
-        dados[candidato] = dados[candidato][:10]
+    for candidato in dados_receita:
+        dados_receita[candidato].sort(key=lambda tup: tup[1], reverse=True)
+        dados_receita[candidato] = dados_receita[candidato][:10]
 
-    return render(request, 'receitas/empresas.html', {'dados': dados})
+    return render(request, 'receitas/candidatos.html', {'dados_receita': dados_receita})
 
 @register.filter('get_value_from_dict')
 def get_value_from_dict(dict_data, key):

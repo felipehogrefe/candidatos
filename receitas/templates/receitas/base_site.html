@@ -1,18 +1,72 @@
+<head>
+    <style>
+    .collapsible {
+        text-color: #337ab7;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 25px;
+        border-radius: 15px;
+        background: white;
+    }
 
-<div>
-    <header style="/* Stick to the top */ position: sticky; top: 20; margin-bottom: 30; background: white">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <h1 style="margin: auto; padding: 10px">
-            <a href="{% url 'receitas:index'%}" style="margin-right: 20px">Início</a>
-            <a href="{% url 'receitas:receitas'%}" style="margin-right: 20px">Receitas</a>
-            <a href="{% url 'receitas:despesas'%}" style="margin-right: 20px">Despesas</a>
-            <a href="{% url 'receitas:empresas'%}" style="margin-right: 20px">Empresas</a>
-        </h1>
-    </header>
-    <hr />
-    <main>
-        {% block branding %}
-        {% endblock %}
-    </main>
-</div>
+    .active, .collapsible:hover {
+        text-color: #337ab7;
+
+    }
+
+    .content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+
+    }
+
+    .border {
+        border-radius: 15px;
+        border: 2px solid #337ab7;
+        margin: 5px;
+    }
+    </style>
+</head>
+<body>
+    <div style="padding: 0; margin: 0;">
+        <header style="/* Stick to the top */ position: sticky; top: 0">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+            <div style=" background: white;">
+                <h1 style="margin-bottom: 20px; margin-left: 10px">
+                    <a href="{% url 'receitas:index'%}" style="margin-right: 20px">Início</a>
+                    <a href="{% url 'receitas:receitas'%}" style="margin-right: 20px">Receitas</a>
+                    <a href="{% url 'receitas:despesas'%}" style="margin-right: 20px">Despesas</a>
+                    <a href="{% url 'receitas:candidatos'%}" style="margin-right: 20px">Candidatos</a>
+                </h1>
+                <hr />
+            </div>
+        </header>
+        <main>
+            {% block branding %}
+            {% endblock %}
+        </main>
+    </div>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            }
+          });
+        }
+    </script>
+</body>
 

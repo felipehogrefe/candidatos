@@ -1,0 +1,38 @@
+{% extends "receitas/base_site.html" %}
+
+{% block branding %}
+
+<div style="height: 80vh; overflow-y: scroll;">
+        {% for key in dados_receita %}
+        <div class="border">
+            <button class="collapsible">{{key}}</button>
+            <div class="content">
+                <table>
+                    <td>
+                        {% for value in dados_receita|get_value_from_dict:key %}
+                            <ul>
+                                <li>
+                                    R$ {{value.1}} doados por <a href="{% url 'receitas:pessoa_detail' value.0.1.id %}">{{ value.0.1 }}</a> {% if value.0.0 %} sócio nas seguintes empresas: {% endif %}
+                                    {% for empresa in value.0.0 %}
+                                        <ul>
+                                            <li>
+                                                {{ empresa }}
+                                            </li>
+                                        </ul>
+                                    {% endfor %}
+                                </li>
+                            </ul>
+                        {% endfor %}
+                    </td>
+                    <td>
+
+
+                    </td>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+</div>
+
+
+{% endblock %}
